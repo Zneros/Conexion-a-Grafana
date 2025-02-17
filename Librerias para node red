@@ -1,0 +1,2 @@
+para instalar librerias en Node-RED, se va a manage palette e instala node-red-contrib-influxdb
+y para el influxdb out se necesita el token que se consigue en la misma pagina de influx, se crea y se dan los permisos
