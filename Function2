@@ -1,0 +1,31 @@
+// Esta programación se precisa para el envio de los datos a InfluxDB
+if (typeof msg.payload !== "object" || msg.payload === null) {
+    node.error("msg.payload no es un objeto válido", msg);
+    return null;
+}
+
+// Verificar que los datos contienen "value" y "sensor"
+if (!msg.payload.hasOwnProperty("value") || !msg.payload.hasOwnProperty("sensor")) {
+    node.error("msg.payload no contiene los campos esperados", msg);
+    return null;
+}
+
+// Función para convertir los valores a número si es necesario
+// let value = parseFloat(msg.payload.value);
+
+// Validación de si el valor es numérico
+if (isNaN(value)) {
+    node.error("El campo 'value' no es un número válido", msg);
+    return null;
+}
+
+// Construcción del mensaje a enviar 
+msg.payload = {
+    value: value,
+    sensor: msg.payload.sensor
+};
+
+// Mostrar en el debug el mensaje enviado
+node.warn("Mensaje enviado a InfluxDB: " + JSON.stringify(msg.payload));
+
+return msg;
